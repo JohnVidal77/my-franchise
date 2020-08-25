@@ -15,7 +15,7 @@ const ForgotPassword = () => {
       justifyContent="center"
       alignItems="center">
       <Link
-        title="Voltar"
+        title="Back"
         to="/login"
         color="white"
         position="absolute"
@@ -26,11 +26,11 @@ const ForgotPassword = () => {
       <Box maxWidth="md" padding="4">
         <Image alt="MY|FRANCHISE" src={Logo} marginBottom="8" />
         <Text textAlign="center" marginBottom="4" color="white">
-          Envie seu email e te mandaremos um link para recuperar a senha.
+          Enter your email and we'll send and email with instructions.
         </Text>
         <FormControl>
-          <Input placeholder="Email" />
-          <ButtonGreen isDisabled>Recuperar Sena</ButtonGreen>
+          <Input name="email" placeholder="Email" />
+          <ButtonGreen isDisabled>Send Instructions</ButtonGreen>
         </FormControl>
       </Box>
     </Flex>

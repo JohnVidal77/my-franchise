@@ -17,17 +17,17 @@ const Login = () => {
       <Box maxWidth="md" padding="4">
         <Image alt="MY|FRANCHISE logo" marginBottom="8" src={Logo} />
         <FormControl>
-          <Input type="email" placeholder="Email" />
-          <Input type="password" placeholder="Senha" />
-          <ButtonGreen isDisabled>Entrar</ButtonGreen>
+          <Input name="email" type="email" placeholder="Email" />
+          <Input name="password" type="password" placeholder="Password" />
+          <ButtonGreen isDisabled>Login</ButtonGreen>
         </FormControl>
         <Text textAlign="center" marginBottom="4" color="white">
-          Ainda não é cadastrado?{' '}
-          <Link title="CADASTRE-SE AGORA" to="/register" fontWeight="600" />
+          Don't have an account?{' '}
+          <Link title="SIGN UP" to="/register" fontWeight="600" />
         </Text>
         <Text textAlign="center" color="white">
-          Esqueceu a senha?{' '}
-          <Link title="CLIQUE AQUI" to="/forgot-password" fontWeight="600" />
+          Forgot your password?{' '}
+          <Link title="CLICK HERE" to="/forgot-password" fontWeight="600" />
         </Text>
       </Box>
     </Flex>

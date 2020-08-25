@@ -1,4 +1,5 @@
 import React from 'react';
+import {Form} from '@unform/web';
 import {
   Grid,
   Box,
@@ -7,14 +8,30 @@ import {
   Text,
   FormControl,
   Divider,
+  useToast,
 } from '@chakra-ui/core';
 
 import Input from '../../components/input';
 import ButtonGreen from '../../components/button';
-import Logo from '../../assets/logo-orange.png';
 import Link from '../../components/link';
 
+import Logo from '../../assets/logo-orange.png';
+
 const Register = () => {
+  const toast = useToast();
+
+  function handleSubmit(data: object) {
+    localStorage.setItem('userInfo', JSON.stringify(data));
+    toast({
+      position: 'bottom-right',
+      title: 'User Created',
+      description: 'Your user was saved on localstorage',
+      status: 'success',
+      duration: 5000,
+      isClosable: true,
+    });
+  }
+
   return (
     <Grid
       backgroundColor="blue.400"
@@ -50,7 +67,7 @@ const Register = () => {
         </Text>
       </Box>
 
-      <FormControl padding="4">
+      <FormControl as={Form} onSubmit={handleSubmit} padding="4">
         <Grid
           height="100%"
           templateColumns={['1fr', '1fr 500px 500px 1fr']}
@@ -64,21 +81,29 @@ const Register = () => {
             <fieldset>
               <legend>Dados da empresa</legend>
               <Divider />
-              <Input placeholder="Razão Social" />
-              <Input placeholder="CNPJ" />
+              <Input
+                name="company.name"
+                type="text"
+                placeholder="Company Name"
+              />
+              <Input
+                name="company.document"
+                type="text"
+                placeholder="Document"
+              />
             </fieldset>
           </Box>
           <Box gridArea="user" color="white">
             <fieldset>
               <legend>Dados do usuário</legend>
               <Divider />
-              <Input placeholder="Nome" />
-              <Input placeholder="Email" />
-              <Input placeholder="Senha" />
+              <Input name="name" type="text" placeholder="Name" />
+              <Input name="email" type="email" placeholder="Email" />
+              <Input name="password" type="password" placeholder="Password" />
             </fieldset>
           </Box>
           <Box gridArea="action">
-            <ButtonGreen isDisabled>CADASTRAR</ButtonGreen>
+            <ButtonGreen type="submit">REGISTER</ButtonGreen>
           </Box>
         </Grid>
       </FormControl>

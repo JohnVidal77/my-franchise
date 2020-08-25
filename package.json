@@ -2,7 +2,7 @@
   "name": "my-franchise",
   "version": "0.1.0",
   "private": true,
-    "homepage": "http://johnvidal77.github.io/my-franchise-management",
+  "homepage": "http://johnvidal77.github.io/my-franchise-management",
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^10.0.35",
@@ -10,6 +10,8 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@unform/core": "^2.1.3",
+    "@unform/web": "^2.1.3",
     "emotion-theming": "^10.0.27",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
