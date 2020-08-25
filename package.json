@@ -2,7 +2,7 @@
   "name": "my-franchise",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://JohnVidal77.github.io/my-franchise",
+    "homepage": "http://johnvidal77.github.io/my-franchise-management",
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^10.0.35",
