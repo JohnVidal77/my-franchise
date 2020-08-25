@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+import {Heading} from '@chakra-ui/core';
 
 import Login from '../pages/login';
 import ForgotPassword from '../pages/forgot-password';
@@ -13,7 +14,7 @@ const Router = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/register" component={Register} />
-        <Route path="*" component={() => <h1>404 Not Found</h1>} />
+        <Route path="*" component={() => <Heading>404 Not Found</Heading>} />
       </Switch>
     </BrowserRouter>
   );
