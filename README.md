@@ -1,3 +1,44 @@
-![My Franchise Logo](https://lh3.googleusercontent.com/ex5k8frwXBDnSezPJZ1mY88rJRt4WKII1XFYX-FdPbKP5ZbD3Ie7uUssvPtbB1blN-YbFgkrpWta6tB6s6ls9MqGh7FC1pb0wyPE5cM-c8JqxpO2o_xSvX2LojgV4dde7Og1aJogvEtkaYQjMP_5qdha5TZ3O3uCeKjChUDE7XeuxLZtbLwe0-pO4HH18x40pmq0nhUr4RCrWUTW12eqdwaQk44wkf6Z7zpLENRAkqwkrRtkaSbgH2oSziHgS8qgCSeAKNs2OEd_NDUpl2wjIejNpmxGuOj75x8LILaGOkWLqAJ1Z1pVE3dbbHTpR1LF05B32r_bl3ybzLHI8F_ICSjWUJiP_KscM9x0I9UEsA5MCnI_I8yEXbQK2l8SpLKMxLb5VIEPs9UDu2Lz82afXspJkdaC1xRS37ieN4MbvO-W4QCH4B5kWEoY8C3qCXPfQGV72aMBQjDXLkjBqQ3FyNSTQcGGM_FpmICf05cKkNxsqqVVsBQmX0WmuageoqxZ4watBP5wfTKR-yHioxxJqq7m1Bc5jKKeO8p-ZD-KRcBz-vha515XRaS2aGGb0_3PHMHAshKk8J4e7UgTBaJV4ekCUTB3RZ0uWSXt8Pqa3CnrhLblfC7s9lL3rj_53twtjLJD6K381Y_JSWukwctdtnzXZ2lmKNhkaElMPb0semexXucW_M-NmnApEMlHGA=w1440-h900-no?authuser=0)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# MY|FRANCHISE
+## Available Scripts
+
+In the project directory, you can run:
+
+### `yarn start`
+
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
+
+### `yarn test`
+
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `yarn build`
+
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `yarn eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
