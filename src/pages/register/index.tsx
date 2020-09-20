@@ -1,27 +1,40 @@
-import React from 'react';
+import React, {useRef} from 'react';
+
+import {SubmitHandler, FormHandles} from '@unform/core';
+
 import {Form} from '@unform/web';
+
+import {useHistory} from 'react-router-dom';
+
 import {
   Grid,
   Box,
   Image,
   Heading,
   Text,
-  FormControl,
   Divider,
   useToast,
 } from '@chakra-ui/core';
 
 import Input from '../../components/input';
+
 import ButtonGreen from '../../components/button';
+
 import Link from '../../components/link';
 
 import Logo from '../../assets/logo-orange.png';
 
 const Register = () => {
+  const formRef = useRef<FormHandles>(null);
+
+  const history = useHistory();
+
   const toast = useToast();
 
-  function handleSubmit(data: object) {
+  const handleSubmit: SubmitHandler<FormData> = (data) => {
     localStorage.setItem('userInfo', JSON.stringify(data));
+
+    // TODO: Add Validation
     toast({
       position: 'bottom-right',
       title: 'User Created',
@@ -30,7 +43,9 @@ const Register = () => {
       duration: 5000,
       isClosable: true,
     });
-  }
+
+    history.push('/login');
+  };
 
   return (
     <Grid
@@ -58,34 +73,40 @@ const Register = () => {
           marginBottom="4"
           src={Logo}
         />
+
         <Heading textAlign="center" fontSize="lg" color="white">
-          Seja bem vindo!
+          Welcome!
         </Heading>
+
         <Text textAlign="center" fontSize="md" color="white">
-          Passo 1 de 3: Queremos te conhecer melhor! Comece preenchendo os dados
-          abaixo.
+          We want to get to know you better! Start filling out all the entries
+          below.
         </Text>
       </Box>
 
-      <FormControl as={Form} onSubmit={handleSubmit} padding="4">
+      <Form ref={formRef} onSubmit={handleSubmit}>
         <Grid
           height="100%"
           templateColumns={['1fr', '1fr 500px 500px 1fr']}
           templateRows={['', '5fr 1fr']}
           templateAreas={[
             "'company' 'user' 'action'",
+
             " '. company user .' '. action action .'",
           ]}
           gridGap="4">
           <Box gridArea="company" color="white">
             <fieldset>
               <legend>Dados da empresa</legend>
+
               <Divider />
+
               <Input
                 name="company.name"
                 type="text"
                 placeholder="Company Name"
               />
+
               <Input
                 name="company.document"
                 type="text"
@@ -93,20 +114,26 @@ const Register = () => {
               />
             </fieldset>
           </Box>
+
           <Box gridArea="user" color="white">
             <fieldset>
               <legend>Dados do usuário</legend>
+
               <Divider />
+
               <Input name="name" type="text" placeholder="Name" />
+
               <Input name="email" type="email" placeholder="Email" />
+
               <Input name="password" type="password" placeholder="Password" />
             </fieldset>
           </Box>
+
           <Box gridArea="action">
             <ButtonGreen type="submit">REGISTER</ButtonGreen>
           </Box>
         </Grid>
-      </FormControl>
+      </Form>
     </Grid>
   );
 };
