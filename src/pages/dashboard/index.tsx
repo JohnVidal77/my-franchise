@@ -8,10 +8,13 @@ import {
   InputGroup,
   Input,
   InputLeftElement,
+  FormControl,
+  FormLabel,
   Icon,
 } from '@chakra-ui/core';
 
 import Navbar from '../../components/navbar';
+import InfoCard from '../../components/info-card';
 
 const Dashboard: React.FC = () => {
   return (
@@ -28,13 +31,26 @@ const Dashboard: React.FC = () => {
             </Text>
           </Box>
         </Flex>
-        <Divider />
-        <InputGroup>
-          <InputLeftElement
-            children={<Icon name="search" color="gray.300" />}
-          />
-          <Input placeholder="Filter by unit" />
-        </InputGroup>
+        <Divider marginTop="8" />
+        <FormControl marginTop="8">
+          <FormLabel htmlFor="search">Filter by unit</FormLabel>
+          <InputGroup>
+            <InputLeftElement
+              children={<Icon name="search" color="gray.300" />}
+            />
+            <Input
+              type="text"
+              id="search"
+              aria-describedby="search-helper-text"
+            />
+          </InputGroup>
+        </FormControl>
+        <Flex>
+          <InfoCard />
+          <InfoCard />
+          <InfoCard />
+          <InfoCard />
+        </Flex>
       </Box>
     </>
   );
