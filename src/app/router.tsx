@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+import {HashRouter, Switch, Route, Redirect} from 'react-router-dom';
 import {Heading} from '@chakra-ui/core';
 
 import Login from '../pages/login';
@@ -8,7 +8,7 @@ import Register from '../pages/register';
 
 const Router = () => {
   return (
-    <BrowserRouter basename={`${process.env.PUBLIC_URL}/`}>
+    <HashRouter basename={`${process.env.PUBLIC_URL}/`}>
       <Switch>
         <Route exact path="/" component={() => <Redirect to="/login" />} />
         <Route exact path="/login" component={Login} />
@@ -16,7 +16,7 @@ const Router = () => {
         <Route exact path="/register" component={Register} />
         <Route path="*" component={() => <Heading>404 Not Found</Heading>} />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
