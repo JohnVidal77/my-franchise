@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/my-franchise-management/static/js/main.0f55c80b.chunk.js",
-    "main.js.map": "/my-franchise-management/static/js/main.0f55c80b.chunk.js.map",
+    "main.js": "/my-franchise-management/static/js/main.90a67894.chunk.js",
+    "main.js.map": "/my-franchise-management/static/js/main.90a67894.chunk.js.map",
     "runtime-main.js": "/my-franchise-management/static/js/runtime-main.af6c3a14.js",
     "runtime-main.js.map": "/my-franchise-management/static/js/runtime-main.af6c3a14.js.map",
-    "static/js/2.defee820.chunk.js": "/my-franchise-management/static/js/2.defee820.chunk.js",
-    "static/js/2.defee820.chunk.js.map": "/my-franchise-management/static/js/2.defee820.chunk.js.map",
+    "static/js/2.263a014e.chunk.js": "/my-franchise-management/static/js/2.263a014e.chunk.js",
+    "static/js/2.263a014e.chunk.js.map": "/my-franchise-management/static/js/2.263a014e.chunk.js.map",
     "index.html": "/my-franchise-management/index.html",
-    "precache-manifest.4263b54e08bed9b18772916785f22550.js": "/my-franchise-management/precache-manifest.4263b54e08bed9b18772916785f22550.js",
+    "precache-manifest.0ed739efa369aa6a65411946d87a064f.js": "/my-franchise-management/precache-manifest.0ed739efa369aa6a65411946d87a064f.js",
     "service-worker.js": "/my-franchise-management/service-worker.js",
-    "static/js/2.defee820.chunk.js.LICENSE.txt": "/my-franchise-management/static/js/2.defee820.chunk.js.LICENSE.txt"
+    "static/js/2.263a014e.chunk.js.LICENSE.txt": "/my-franchise-management/static/js/2.263a014e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.af6c3a14.js",
-    "static/js/2.defee820.chunk.js",
-    "static/js/main.0f55c80b.chunk.js"
+    "static/js/2.263a014e.chunk.js",
+    "static/js/main.90a67894.chunk.js"
   ]
 }
