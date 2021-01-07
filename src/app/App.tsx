@@ -1,14 +1,7 @@
 import React from 'react';
-import ThemeContainer from '../contexts/themes/theme-container';
 
-import Router from './router';
+import Router from './Router';
 
-function App() {
-  return (
-    <ThemeContainer>
-      <Router />
-    </ThemeContainer>
-  );
-}
+const App: React.FC = () => <Router />;
 
 export default App;
