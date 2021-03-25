@@ -42,6 +42,7 @@
       "import/extensions": "off",
       "import/no-useless-path-segments": "off",
       "import/named": "off",
+      "react/jsx-props-no-spreading": "off",
       "react/jsx-indent": "off"
     },
     "settings": {
