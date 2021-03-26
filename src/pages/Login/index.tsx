@@ -8,15 +8,7 @@ import Logo from '../../assets/logo-orange.png';
 import IsValidEmail from '../../services/IsValidEmail';
 import { ToastSuccess, ToastWarning } from '../../services/ShowToaster';
 
-interface IUserData {
-  company: {
-    name: string;
-    doc: string;
-  };
-  name: string;
-  email: string;
-  password: string;
-}
+import User from '../../types/User';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -34,7 +26,7 @@ const Login: React.FC = () => {
 
       let user;
 
-      if (data) user = JSON.parse(data) as IUserData;
+      if (data) user = JSON.parse(data) as User;
 
       if (user?.email === email && user?.password === password)
         return ToastSuccess('Welcome back!');

@@ -27,7 +27,7 @@ const Register: React.FC = () => {
 
   return (
     <div className="relative flex justify-center items-center bg-blue-500 h-screen w-screen">
-      <Link to="/" className="absolute top-8 left-8 text-white">
+      <Link to="/" className="absolute top-4 left-4 text-white">
         Back
       </Link>
       <div className="max-w-sm  px-1">
