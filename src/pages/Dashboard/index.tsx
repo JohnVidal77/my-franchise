@@ -113,19 +113,17 @@ const Dashboard: React.FC = () => {
 
         <div className="px-3 mt-4">
           <table className="w-full">
-            <tr>
+            <tr className="mb-2">
               <th className="text-left">Apelido</th>
-              <th className="hidden md:block text-left">Movimento</th>
+              <th className="hidden md:block text-left">N de Funcionários</th>
               <th className="text-left">Caixa Mensal</th>
               <th className="hidden md:block text-left">Ultima Atualização</th>
-              <th className="w-14"> </th>
             </tr>
-            <tr className="border-l-4 border-red-600 pl-2">
-              <td>Jill</td>
-              <td className="hidden md:block">Smith</td>
+            <tr className="border-l-4 border-red-600 h-10">
+              <td className="pl-2">Jill</td>
+              <td className="hidden md:table-cell">Smith</td>
               <td>50</td>
-              <td className="hidden md:block">50</td>
-              <td className="text-xs text-blueGray-600">Ver Mais</td>
+              <td className="hidden md:table-cell">50</td>
             </tr>
           </table>
         </div>
