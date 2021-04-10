@@ -14,10 +14,10 @@ const Input: React.FC<IProps> = ({
 }: IProps) => {
   return (
     <input
-      className={`w-full border-2 rounded mb-2 bg-transparent p-2 ${
+      className={`w-full border-2 rounded mb-2 p-2 ${
         dark
-          ? 'border-gray-500 placeholder-gray-500 text-gray-700'
-          : 'border-white placeholder-white text-white'
+          ? 'border-blueGray-500 placeholder-blueGray-500 text-gray-700'
+          : 'border-white placeholder-white text-white bg-transparent'
       }  duration-200 focus:outline-none focus:border-yellow-500`}
       type="text"
       id={name}

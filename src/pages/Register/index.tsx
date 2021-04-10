@@ -52,7 +52,7 @@ const Register: React.FC = () => {
         </figure>
       </nav>
 
-      <div className="max-w-sm md:max-w-2xl mx-auto px-1">
+      <div className="max-w-sm md:max-w-2xl mx-auto px-3">
         <div className="text-center text-white mb-6">
           <h1 className="text-2xl font-semibold">Welcome!</h1>
           <span>

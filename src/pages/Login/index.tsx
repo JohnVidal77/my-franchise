@@ -38,7 +38,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center bg-blue-500 h-screen w-screen">
-      <div className="max-w-sm px-1">
+      <div className="max-w-sm px-3">
         <figure className="mb-8">
           <img src={Logo} alt="My franchise" />
         </figure>

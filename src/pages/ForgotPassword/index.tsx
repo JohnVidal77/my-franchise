@@ -30,7 +30,7 @@ const Register: React.FC = () => {
       <Link to="/" className="absolute top-4 left-4 text-white">
         Back
       </Link>
-      <div className="max-w-sm  px-1">
+      <div className="max-w-sm  px-3">
         <figure className="mb-8">
           <img src={Logo} alt="My franchise" />
         </figure>

@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
 // import { FcViewDetails, FcMindMap } from 'react-icons/fc';
+import {
+  FiTrendingUp,
+  FiTrendingDown,
+  FiAlertCircle,
+  FiDollarSign,
+} from 'react-icons/fi';
 
 import User from '../../types/User';
 
@@ -21,7 +27,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div>
-      <header className="bg-blue-500 border-blue-700 border-b-2 flex justify-between w-full h-14 px-4 py-4">
+      <header className="bg-blue-500 shadow flex justify-between w-full h-14 px-4 py-4">
         <div>
           <figure className="mb-8 w-48 h-6 hidden md:block">
             <img src={Logo} alt="My franchise" />
@@ -34,7 +40,7 @@ const Dashboard: React.FC = () => {
 
       <main className="max-w-5xl mx-auto mt-4 px-2">
         <div className="flex flex-col mb-4 md:flex-row justify-between">
-          <div className="mb-4">
+          <div className="mb-4 text-center md:text-left">
             <span className="block text-yellow-500 font-bold text-xl">
               Olá, John Vidal
             </span>
@@ -61,8 +67,67 @@ const Dashboard: React.FC = () => {
             </button>
           </div>
         </div>
+
+        <div className="flex flex-wrap justify-around mt-4">
+          <div className="flex justify-center px-2 w-1/2 md:w-auto items-center mb-4">
+            <FiDollarSign className="mr-4 text-lg md:text-3xl text-blue-600" />
+            <div>
+              <strong className="block text-lg md:text-2xl text-blue-600">
+                14.000,00
+              </strong>
+              <span className="block text-blueGray-700">Caixa Total</span>
+            </div>
+          </div>
+          <div className="flex justify-center px-2 w-1/2 md:w-auto items-center mb-4">
+            <FiTrendingUp className="mr-4 text-lg md:text-3xl text-lime-600" />
+            <div>
+              <strong className="block text-lg md:text-2xl text-lime-600">
+                05
+              </strong>
+              <span className="block text-blueGray-700">Lucrando</span>
+            </div>
+          </div>
+          <div className="flex justify-center px-2 w-1/2 md:w-auto items-center mb-4">
+            <FiAlertCircle className="mr-4 text-lg md:text-3xl text-yellow-500" />
+            <div>
+              <strong className="block text-lg md:text-2xl text-yellow-500">
+                02
+              </strong>
+              <span className="block text-blueGray-700">Sem dados</span>
+            </div>
+          </div>
+          <div className="flex justify-center px-2 w-1/2 md:w-auto items-center mb-4">
+            <FiTrendingDown className="mr-4 text-lg md:text-3xl text-red-600" />
+            <div>
+              <strong className="block text-lg md:text-2xl text-red-600">
+                13
+              </strong>
+              <span className="block text-blueGray-700">Prejuizo</span>
+            </div>
+          </div>
+        </div>
+
         <div>
           <Input type="text" name="search" placeholder="Search by name" dark />
+        </div>
+
+        <div className="px-3 mt-4">
+          <table className="w-full">
+            <tr>
+              <th className="text-left">Apelido</th>
+              <th className="hidden md:block text-left">Movimento</th>
+              <th className="text-left">Caixa Mensal</th>
+              <th className="hidden md:block text-left">Ultima Atualização</th>
+              <th className="w-14"> </th>
+            </tr>
+            <tr className="border-l-4 border-red-600 pl-2">
+              <td>Jill</td>
+              <td className="hidden md:block">Smith</td>
+              <td>50</td>
+              <td className="hidden md:block">50</td>
+              <td className="text-xs text-blueGray-600">Ver Mais</td>
+            </tr>
+          </table>
         </div>
       </main>
     </div>
