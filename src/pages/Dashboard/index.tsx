@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   FiTrendingUp,
   FiTrendingDown,
   FiAlertCircle,
   FiDollarSign,
 } from 'react-icons/fi';
+
+import FormatPrice from '../../services/FormatPrice';
 
 import User from '../../types/User';
 import Stories from '../../types/Stories';
@@ -13,7 +15,9 @@ import Logo from '../../assets/logo-orange.png';
 import Input from '../../components/Input';
 
 import StoriesData from '../../data/stories.json';
-import { useCallback } from 'react';
+
+const filterButton =
+  'duration-200 rounded bg-white cursor-pointer filter hover:brightness-90';
 
 const Dashboard: React.FC = () => {
   const [view, setView] = useState<'list' | 'map'>('list');
@@ -62,19 +66,16 @@ const Dashboard: React.FC = () => {
             <img src={Logo} alt="My franchise" />
           </figure>
         </div>
-        <div className="text-white">
-          <span>{user?.name}</span>
-        </div>
       </header>
 
       <main className="max-w-5xl mx-auto mt-4 px-4">
         <div className="flex flex-col mb-4 md:flex-row justify-between">
           <div className="mb-4 text-center md:text-left">
             <span className="block text-yellow-500 font-bold text-xl">
-              Olá, {user?.name}
+              Hello, {user?.name}
             </span>
             <span className="block">
-              Você tem {stories.length} filiais cadastradas
+              You have {stories.length} branches registered
             </span>
           </div>
           <div className="flex items-center w-full md:w-auto">
@@ -85,7 +86,7 @@ const Dashboard: React.FC = () => {
                 view === 'list' && 'bg-yellow-500'
               }`}
             >
-              Lista
+              List
             </button>
             <button
               type="button"
@@ -94,7 +95,7 @@ const Dashboard: React.FC = () => {
                 view === 'map' && 'bg-yellow-500'
               }`}
             >
-              Mapa
+              Map
             </button>
           </div>
         </div>
@@ -104,36 +105,42 @@ const Dashboard: React.FC = () => {
             <FiDollarSign className="mr-4 text-lg md:text-3xl text-blue-600" />
             <div>
               <strong className="block text-lg md:text-2xl text-blue-600">
-                {totalMoney}
+                {FormatPrice(totalMoney)}
               </strong>
-              <span className="block text-blueGray-700">Caixa Total</span>
+              <span className="block text-blueGray-700">Total Cash</span>
             </div>
           </div>
-          <div className="flex justify-center px-2 w-1/2 md:w-auto items-center mb-4">
+          <div
+            className={`flex justify-center px-2 w-1/2 md:w-auto items-center mb-4 ${filterButton}`}
+          >
             <FiTrendingUp className="mr-4 text-lg md:text-3xl text-lime-600" />
             <div>
               <strong className="block text-lg md:text-2xl text-lime-600">
                 {storiesProfiting}
               </strong>
-              <span className="block text-blueGray-700">Lucrando</span>
+              <span className="block text-blueGray-700">Profiting</span>
             </div>
           </div>
-          <div className="flex justify-center px-2 w-1/2 md:w-auto items-center mb-4">
+          <div
+            className={`flex justify-center px-2 w-1/2 md:w-auto items-center mb-4 ${filterButton}`}
+          >
             <FiAlertCircle className="mr-4 text-lg md:text-3xl text-yellow-500" />
             <div>
               <strong className="block text-lg md:text-2xl text-yellow-500">
                 {storiesWithoutData}
               </strong>
-              <span className="block text-blueGray-700">Sem dados</span>
+              <span className="block text-blueGray-700">Without Data</span>
             </div>
           </div>
-          <div className="flex justify-center px-2 w-1/2 md:w-auto items-center mb-4">
+          <div
+            className={`flex justify-center px-2 w-1/2 md:w-auto items-center mb-4 ${filterButton}`}
+          >
             <FiTrendingDown className="mr-4 text-lg md:text-3xl text-red-600" />
             <div>
               <strong className="block text-lg md:text-2xl text-red-600">
                 {storiesLoss}
               </strong>
-              <span className="block text-blueGray-700">Prejuizo</span>
+              <span className="block text-blueGray-700">Losing</span>
             </div>
           </div>
         </div>
@@ -145,10 +152,10 @@ const Dashboard: React.FC = () => {
         <div className="px-3 mt-4 mb-8">
           <table className="w-full">
             <tr className="mb-2">
-              <th className="text-left">Apelido</th>
-              <th className="hidden md:block text-center">N de Funcionários</th>
-              <th className="text-center">Caixa Mensal</th>
-              <th className="hidden md:block text-left">Ultima Atualização</th>
+              <th className="text-left">Name</th>
+              <th className="hidden md:block text-center">Employees</th>
+              <th className="text-left">Monthly Money</th>
+              <th className="hidden md:block text-left">Last Update</th>
             </tr>
 
             {stories.map(storie => (
@@ -161,7 +168,7 @@ const Dashboard: React.FC = () => {
                 <td className="hidden md:table-cell text-center">
                   {storie.employees}
                 </td>
-                <td className="text-center">{storie.money}</td>
+                <td className="text-left">{FormatPrice(storie.money)}</td>
                 <td className="hidden md:table-cell">{storie.updatedAt}</td>
               </tr>
             ))}
