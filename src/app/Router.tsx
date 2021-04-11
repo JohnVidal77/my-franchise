@@ -7,7 +7,7 @@ import Register from '../pages/Register';
 import Dashboard from '../pages/Dashboard';
 
 const Router: React.FC = () => (
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Switch>
       <Route exact path="/" component={() => <Redirect to="/login" />} />
       <Route exact path="/login" component={Login} />
