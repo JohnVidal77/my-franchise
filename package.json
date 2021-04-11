@@ -2,6 +2,7 @@
   "name": "my-franchise",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://johnvidal77.github.io/my-franchise-management/",
   "dependencies": {
     "@craco/craco": "^6.0.0",
     "@tailwindcss/postcss7-compat": "npm:@tailwindcss/postcss7-compat",
