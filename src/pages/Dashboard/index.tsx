@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { FcViewDetails, FcMindMap } from 'react-icons/fc';
 import {
   FiTrendingUp,
   FiTrendingDown,
@@ -8,13 +7,18 @@ import {
 } from 'react-icons/fi';
 
 import User from '../../types/User';
+import Stories from '../../types/Stories';
 
 import Logo from '../../assets/logo-orange.png';
 import Input from '../../components/Input';
 
+import StoriesData from '../../data/stories.json';
+import { useCallback } from 'react';
+
 const Dashboard: React.FC = () => {
   const [view, setView] = useState<'list' | 'map'>('list');
   const [user, setUser] = useState<User | null>();
+  const [stories] = useState<Array<Stories>>(StoriesData);
 
   useEffect(() => {
     const data = localStorage.getItem('@MyFranchise-User');
@@ -23,6 +27,31 @@ const Dashboard: React.FC = () => {
     if (data) obj = JSON.parse(data) as User;
 
     setUser(obj);
+  }, []);
+
+  const totalMoney = stories.reduce((total, storie) => storie.money + total, 0);
+
+  const storiesProfiting = stories.reduce((total, storie) => {
+    if (storie.money > 0) return total + 1;
+    return total;
+  }, 0);
+
+  const storiesWithoutData = stories.reduce((total, storie) => {
+    if (storie.money === 0) return total + 1;
+    return total;
+  }, 0);
+
+  const storiesLoss = stories.reduce((total, storie) => {
+    if (storie.money < 0) return total + 1;
+    return total;
+  }, 0);
+
+  const renderBorderBasedOnStorieStatus = useCallback((value: number) => {
+    if (value < 0) return 'border-red-600';
+
+    if (value > 0) return 'border-lime-600';
+
+    return 'border-yellow-600';
   }, []);
 
   return (
@@ -34,17 +63,19 @@ const Dashboard: React.FC = () => {
           </figure>
         </div>
         <div className="text-white">
-          <span>John Vidal</span>
+          <span>{user?.name}</span>
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto mt-4 px-2">
+      <main className="max-w-5xl mx-auto mt-4 px-4">
         <div className="flex flex-col mb-4 md:flex-row justify-between">
           <div className="mb-4 text-center md:text-left">
             <span className="block text-yellow-500 font-bold text-xl">
-              Olá, John Vidal
+              Olá, {user?.name}
             </span>
-            <span className="block">Você tem 15 filiais cadastradas</span>
+            <span className="block">
+              Você tem {stories.length} filiais cadastradas
+            </span>
           </div>
           <div className="flex items-center w-full md:w-auto">
             <button
@@ -73,7 +104,7 @@ const Dashboard: React.FC = () => {
             <FiDollarSign className="mr-4 text-lg md:text-3xl text-blue-600" />
             <div>
               <strong className="block text-lg md:text-2xl text-blue-600">
-                14.000,00
+                {totalMoney}
               </strong>
               <span className="block text-blueGray-700">Caixa Total</span>
             </div>
@@ -82,7 +113,7 @@ const Dashboard: React.FC = () => {
             <FiTrendingUp className="mr-4 text-lg md:text-3xl text-lime-600" />
             <div>
               <strong className="block text-lg md:text-2xl text-lime-600">
-                05
+                {storiesProfiting}
               </strong>
               <span className="block text-blueGray-700">Lucrando</span>
             </div>
@@ -91,7 +122,7 @@ const Dashboard: React.FC = () => {
             <FiAlertCircle className="mr-4 text-lg md:text-3xl text-yellow-500" />
             <div>
               <strong className="block text-lg md:text-2xl text-yellow-500">
-                02
+                {storiesWithoutData}
               </strong>
               <span className="block text-blueGray-700">Sem dados</span>
             </div>
@@ -100,7 +131,7 @@ const Dashboard: React.FC = () => {
             <FiTrendingDown className="mr-4 text-lg md:text-3xl text-red-600" />
             <div>
               <strong className="block text-lg md:text-2xl text-red-600">
-                13
+                {storiesLoss}
               </strong>
               <span className="block text-blueGray-700">Prejuizo</span>
             </div>
@@ -111,20 +142,29 @@ const Dashboard: React.FC = () => {
           <Input type="text" name="search" placeholder="Search by name" dark />
         </div>
 
-        <div className="px-3 mt-4">
+        <div className="px-3 mt-4 mb-8">
           <table className="w-full">
             <tr className="mb-2">
               <th className="text-left">Apelido</th>
-              <th className="hidden md:block text-left">N de Funcionários</th>
-              <th className="text-left">Caixa Mensal</th>
+              <th className="hidden md:block text-center">N de Funcionários</th>
+              <th className="text-center">Caixa Mensal</th>
               <th className="hidden md:block text-left">Ultima Atualização</th>
             </tr>
-            <tr className="border-l-4 border-red-600 h-10">
-              <td className="pl-2">Jill</td>
-              <td className="hidden md:table-cell">Smith</td>
-              <td>50</td>
-              <td className="hidden md:table-cell">50</td>
-            </tr>
+
+            {stories.map(storie => (
+              <tr
+                className={`border-l-4 ${renderBorderBasedOnStorieStatus(
+                  storie.money,
+                )} h-10`}
+              >
+                <td className="pl-2">{storie.name}</td>
+                <td className="hidden md:table-cell text-center">
+                  {storie.employees}
+                </td>
+                <td className="text-center">{storie.money}</td>
+                <td className="hidden md:table-cell">{storie.updatedAt}</td>
+              </tr>
+            ))}
           </table>
         </div>
       </main>
