@@ -1,4 +1,4 @@
-type Stories = {
+type Stores = {
   id: number;
   name: string;
   employees: number;
@@ -7,4 +7,4 @@ type Stories = {
   createdAt: string;
 };
 
-export default Stories;
+export default Stores;

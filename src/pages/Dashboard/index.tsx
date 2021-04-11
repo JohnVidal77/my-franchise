@@ -9,21 +9,26 @@ import {
 import FormatPrice from '../../services/FormatPrice';
 
 import User from '../../types/User';
-import Stories from '../../types/Stories';
+import Store from '../../types/Store';
 
 import Logo from '../../assets/logo-orange.png';
 import Input from '../../components/Input';
 
-import StoriesData from '../../data/stories.json';
+import StoresData from '../../data/stores.json';
 
 const filterButton =
   'duration-200 rounded bg-white cursor-pointer filter hover:brightness-90';
 
+type FilterValue = '' | 'profit' | 'noData' | 'loss';
+
 const Dashboard: React.FC = () => {
   const [view, setView] = useState<'list' | 'map'>('list');
   const [user, setUser] = useState<User | null>();
+  const [statusFilter, setStatusFilter] = useState<FilterValue>('');
   const [filter, setFilter] = useState('');
-  const [stories, setStories] = useState<Array<Stories>>(StoriesData);
+  const [stores, setStores] = useState<Array<Store>>(StoresData);
+
+  const originalStoresData = StoresData;
 
   useEffect(() => {
     const data = localStorage.getItem('@MyFranchise-User');
@@ -35,30 +40,48 @@ const Dashboard: React.FC = () => {
   }, []);
 
   useEffect((): void => {
-    if (filter === '') return setStories(StoriesData);
+    if (filter === '' && statusFilter === '')
+      return setStores(originalStoresData);
 
-    const result = stories.filter(storie =>
-      storie.name.toLowerCase().includes(filter),
-    );
+    let array: Array<Store> = stores;
 
-    return setStories(result);
+    if (statusFilter !== '') {
+      array = array.filter((storie): Store | void => {
+        if (statusFilter === 'profit' && storie.money > 0) return storie;
+
+        if (statusFilter === 'loss' && storie.money < 0) return storie;
+
+        if (statusFilter === 'noData' && storie.money === 0) return storie;
+      });
+    }
+
+    if (filter !== '') {
+      array = array.filter(storie =>
+        storie.name.toLowerCase().includes(filter),
+      );
+    }
+
+    return setStores(array);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter]);
+  }, [filter, statusFilter]);
 
-  const totalMoney = stories.reduce((total, storie) => storie.money + total, 0);
+  const totalMoney = originalStoresData.reduce(
+    (total, storie) => storie.money + total,
+    0,
+  );
 
-  const storiesProfiting = stories.reduce((total, storie) => {
+  const storiesProfiting = originalStoresData.reduce((total, storie) => {
     if (storie.money > 0) return total + 1;
     return total;
   }, 0);
 
-  const storiesWithoutData = stories.reduce((total, storie) => {
+  const storiesWithoutData = originalStoresData.reduce((total, storie) => {
     if (storie.money === 0) return total + 1;
     return total;
   }, 0);
 
-  const storiesLoss = stories.reduce((total, storie) => {
+  const storiesLoss = originalStoresData.reduce((total, storie) => {
     if (storie.money < 0) return total + 1;
     return total;
   }, 0);
@@ -70,6 +93,15 @@ const Dashboard: React.FC = () => {
 
     return 'border-yellow-600';
   }, []);
+
+  const handleFilterClick = useCallback(
+    (filterValue: FilterValue) => {
+      if (statusFilter !== '') return setStatusFilter('');
+
+      return setStatusFilter(filterValue);
+    },
+    [statusFilter],
+  );
 
   return (
     <div>
@@ -88,7 +120,7 @@ const Dashboard: React.FC = () => {
               Hello, {user?.name}
             </span>
             <span className="block">
-              You have {stories.length} branches registered
+              You have {stores.length} branches registered
             </span>
           </div>
           <div className="flex items-center w-full md:w-auto">
@@ -123,8 +155,12 @@ const Dashboard: React.FC = () => {
               <span className="block text-blueGray-700">Total Cash</span>
             </div>
           </div>
-          <div
-            className={`flex justify-center px-2 w-1/2 md:w-auto items-center mb-4 ${filterButton}`}
+          <button
+            type="button"
+            onClick={() => handleFilterClick('profit')}
+            className={`flex focus:outline-none justify-center px-2 w-1/2 md:w-auto items-center mb-4 ${filterButton} ${
+              statusFilter === 'profit' && 'border-2 border-lime-600'
+            }`}
           >
             <FiTrendingUp className="mr-4 text-lg md:text-3xl text-lime-600" />
             <div>
@@ -133,9 +169,13 @@ const Dashboard: React.FC = () => {
               </strong>
               <span className="block text-blueGray-700">Profiting</span>
             </div>
-          </div>
-          <div
-            className={`flex justify-center px-2 w-1/2 md:w-auto items-center mb-4 ${filterButton}`}
+          </button>
+          <button
+            type="button"
+            onClick={() => handleFilterClick('noData')}
+            className={`flex focus:outline-none justify-center px-2 w-1/2 md:w-auto items-center mb-4 ${filterButton} ${
+              statusFilter === 'noData' && 'border-2 border-yellow-600'
+            }`}
           >
             <FiAlertCircle className="mr-4 text-lg md:text-3xl text-yellow-500" />
             <div>
@@ -144,9 +184,13 @@ const Dashboard: React.FC = () => {
               </strong>
               <span className="block text-blueGray-700">Without Data</span>
             </div>
-          </div>
-          <div
-            className={`flex justify-center px-2 w-1/2 md:w-auto items-center mb-4 ${filterButton}`}
+          </button>
+          <button
+            type="button"
+            onClick={() => handleFilterClick('loss')}
+            className={`flex focus:outline-none justify-center px-2 w-1/2 md:w-auto items-center mb-4 ${filterButton}  ${
+              statusFilter === 'loss' && 'border-2 border-red-600'
+            }`}
           >
             <FiTrendingDown className="mr-4 text-lg md:text-3xl text-red-600" />
             <div>
@@ -155,7 +199,7 @@ const Dashboard: React.FC = () => {
               </strong>
               <span className="block text-blueGray-700">Losing</span>
             </div>
-          </div>
+          </button>
         </div>
 
         <div>
@@ -177,7 +221,7 @@ const Dashboard: React.FC = () => {
               <th className="hidden md:block text-left">Last Update</th>
             </tr>
 
-            {stories.map(storie => (
+            {stores.map(storie => (
               <tr
                 className={`border-l-4 ${renderBorderBasedOnStorieStatus(
                   storie.money,
@@ -192,6 +236,11 @@ const Dashboard: React.FC = () => {
               </tr>
             ))}
           </table>
+          {stores.length === 0 && (
+            <span className="block w-full mt-4 text-3xl font-bold text-center text-blueGray-300">
+              No data to display
+            </span>
+          )}
         </div>
       </main>
     </div>

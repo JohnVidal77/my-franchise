@@ -29,6 +29,8 @@
       "no-redeclare": "off",
       "no-unused-vars": "off",
       "no-plusplus": "off",
+      "consistent-return": "off",
+      "array-callback-return": "off",
       "no-param-reassign": "off",
       "react/jsx-one-expression-per-line": "off",
       "react/jsx-props-no-spreading": "off",
