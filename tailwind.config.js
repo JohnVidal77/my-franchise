@@ -8,9 +8,11 @@ module.exports = {
       sans: ['Poppins', 'sans-serif'],
     },
     colors: {
+      black: colors.black,
       blue: colors.blue,
       blueGray: colors.blueGray,
       lime: colors.lime,
+      green: colors.green,
       yellow: colors.yellow,
       red: colors.red,
       white: colors.white,

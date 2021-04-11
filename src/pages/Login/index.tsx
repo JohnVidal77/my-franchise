@@ -1,8 +1,9 @@
 import React, { useCallback, useState, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import WelcomeModal from '../../components/WelcomeModal';
 
 import Logo from '../../assets/logo-orange.png';
 import IsValidEmail from '../../services/IsValidEmail';
@@ -11,12 +12,17 @@ import { ToastSuccess, ToastWarning } from '../../services/ShowToaster';
 import User from '../../types/User';
 
 const Login: React.FC = () => {
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showWelcomes, setShowWelcomes] = useState(true);
 
   const handleLogin = useCallback(
     (e: FormEvent): void => {
       e.preventDefault();
+
+      if (email === 'test@test.com' && password === 'test')
+        return history.push('/dashboard');
 
       if (!email || !IsValidEmail(email)) return ToastWarning('Email missing');
 
@@ -33,11 +39,12 @@ const Login: React.FC = () => {
 
       return ToastWarning('Email or password wrong');
     },
-    [email, password],
+    [email, history, password],
   );
 
   return (
     <div className="flex justify-center items-center bg-blue-500 h-screen w-screen">
+      <WelcomeModal isShowing={showWelcomes} onClose={setShowWelcomes} />
       <div className="max-w-sm px-3">
         <figure className="mb-8">
           <img src={Logo} alt="My franchise" />
