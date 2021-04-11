@@ -22,7 +22,8 @@ const filterButton =
 const Dashboard: React.FC = () => {
   const [view, setView] = useState<'list' | 'map'>('list');
   const [user, setUser] = useState<User | null>();
-  const [stories] = useState<Array<Stories>>(StoriesData);
+  const [filter, setFilter] = useState('');
+  const [stories, setStories] = useState<Array<Stories>>(StoriesData);
 
   useEffect(() => {
     const data = localStorage.getItem('@MyFranchise-User');
@@ -32,6 +33,18 @@ const Dashboard: React.FC = () => {
 
     setUser(obj);
   }, []);
+
+  useEffect((): void => {
+    if (filter === '') return setStories(StoriesData);
+
+    const result = stories.filter(storie =>
+      storie.name.toLowerCase().includes(filter),
+    );
+
+    return setStories(result);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter]);
 
   const totalMoney = stories.reduce((total, storie) => storie.money + total, 0);
 
@@ -146,7 +159,13 @@ const Dashboard: React.FC = () => {
         </div>
 
         <div>
-          <Input type="text" name="search" placeholder="Search by name" dark />
+          <Input
+            type="text"
+            onChange={e => setFilter(e.target.value)}
+            name="search"
+            placeholder="Search by name"
+            dark
+          />
         </div>
 
         <div className="px-3 mt-4 mb-8">
