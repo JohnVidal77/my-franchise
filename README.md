@@ -2,4 +2,5 @@
 
 # MY|FRANCHISE
 
+This project is a for demonstration.
 
